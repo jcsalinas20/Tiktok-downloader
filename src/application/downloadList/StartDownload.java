@@ -85,8 +85,10 @@ public class StartDownload extends Application implements Initializable {
     }
 
     private void readListToStartCommand(File file) {
+        String commandOS = (System.getProperty("os.name").equals("Linux")) ? "/bin/bash" : "cmd";
+        String options = (System.getProperty("os.name").equals("Linux")) ? "-c" : "/C";
         for (String link : StartDownload.listUrl)
-            runCommand("cmd", "/C", "tiktok-scraper video "+link+" -d -w false --filepath '"+file.getParent()+"'");
+            runCommand(commandOS, options, "tiktok-scraper video "+link+" -d -w false --filepath '"+file.getParent()+"'");
     }
 
     private void runCommand(String... command) {

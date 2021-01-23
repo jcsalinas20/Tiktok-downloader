@@ -211,7 +211,7 @@ public class SaveAsFile  extends Application implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfPath.setText(System.getProperty("user.home") + File.separator + "Downloads");
+        tfPath.setText(System.getProperty("user.home"));
         createDirectoryChooser();
 
         tfFileNameOnKeyTyped();

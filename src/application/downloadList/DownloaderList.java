@@ -132,8 +132,8 @@ public class DownloaderList extends Application implements Initializable {
         }
     }
 
-    private void setUrlErrorType() {
-        lblError.setText("Invalid TikTok URL");
+    private void setUrlErrorType(String msg) {
+        lblError.setText(msg);
         final Timeline animation = new Timeline(
             new KeyFrame(
                     Duration.seconds(3),
@@ -148,10 +148,12 @@ public class DownloaderList extends Application implements Initializable {
         String url = tfUrl.getText().split("\\?")[0];
         // checkStatusUrl(url);
         if (validateUrlTikTok(url)) {
-            listLinks.getItems().add(url);
-            tfUrl.setPromptText(url);
+            if (!listLinks.getItems().contains(url)) {
+                listLinks.getItems().add(url);
+                tfUrl.setPromptText(url);
+            } else setUrlErrorType("This URL is in the list.");
             tfUrl.setText("");
-        } else setUrlErrorType();
+        } else setUrlErrorType("Invalid TikTok URL");
     }
 
     private void tfUrlKeyListener() {
@@ -289,12 +291,11 @@ public class DownloaderList extends Application implements Initializable {
         tfTikTokNameOnKeyTyped();
         tfUrlKeyListener();
 
-        tfPath.setText(System.getProperty("user.home") + File.separator + "Downloads");
-        listLinks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tfPath.setText(System.getProperty("user.home"));
 
+        listLinks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         listLinks.getItems().clear();
         listLinks.setItems(itemsListView);
-
 
         Label menuDownloadListLabel = new Label("Download List");
         menuDownloadListLabel.setOnMouseClicked(event -> {
