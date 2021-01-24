@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static application.downloadList.DownloaderList.itemsListView;
-import static application.Main.frameDownloaderList;
+import static application.Main.screenDownloaderList;
 import static application.Main.frameImportFile;
 
 public class ImportFile extends Application implements Initializable {
@@ -60,7 +60,7 @@ public class ImportFile extends Application implements Initializable {
         FileChooser fileChooser = new FileChooser();
         btnExamine.setOnAction(e -> {
             fileChooser.setInitialDirectory(new File(tfPath.getText()).getParentFile());
-            File selectedFile = fileChooser.showOpenDialog(frameDownloaderList);
+            File selectedFile = fileChooser.showOpenDialog(screenDownloaderList);
             if (selectedFile != null)
                 tfPath.setText(selectedFile.getAbsolutePath());
         });

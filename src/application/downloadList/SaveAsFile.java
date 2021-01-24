@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
-import static application.Main.frameDownloaderList;
+import static application.Main.screenDownloaderList;
 import static application.Main.frameSaveAsFile;
 import static css.StylesCSS.errorTextField;
 import static css.StylesCSS.defaultTextField;
@@ -55,7 +55,7 @@ public class SaveAsFile  extends Application implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         btnExamine.setOnAction(e -> {
             directoryChooser.setInitialDirectory(new File(tfPath.getText()).getParentFile());
-            File selectedDirectory = directoryChooser.showDialog(frameDownloaderList);
+            File selectedDirectory = directoryChooser.showDialog(screenDownloaderList);
             if (selectedDirectory != null) {
                 tfPath.setText(selectedDirectory.getAbsolutePath());
                 changeAbsolutePathFile();

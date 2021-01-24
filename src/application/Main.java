@@ -11,7 +11,9 @@ import javafx.scene.Scene;
 
 public class Main extends Application {
 
-    public static Stage frameDownloaderList;
+    public static Stage screenDownloaderList;
+    public static Stage screenAllUserVideos;
+    public static Stage screenOneVideo;
     public static Stage frameSaveAsFile;
     public static Stage frameImportFile;
     public static Stage frameStartDownload;
@@ -25,8 +27,40 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("Tiktok Downloader");
             primaryStage.setResizable(false);
-            frameDownloaderList = primaryStage;
-            frameDownloaderList.show();
+            screenDownloaderList = primaryStage;
+            screenDownloaderList.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showScreenAllUserVideos() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/allUserVideos/AllUserVideos.fxml"));
+            Parent root = loader.load();
+            screenAllUserVideos = new Stage();
+            screenAllUserVideos.setTitle("All User Videos");
+            screenAllUserVideos.setScene(new Scene(root));
+            screenAllUserVideos.setResizable(false);
+            screenAllUserVideos.initModality(Modality.APPLICATION_MODAL);
+            screenAllUserVideos.show();
+            screenDownloaderList.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showScreenOneVideo() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/oneVideo/OneVideo.fxml"));
+            Parent root = loader.load();
+            screenOneVideo = new Stage();
+            screenOneVideo.setTitle("One Video");
+            screenOneVideo.setScene(new Scene(root));
+            screenOneVideo.setResizable(false);
+            screenOneVideo.initModality(Modality.APPLICATION_MODAL);
+            screenOneVideo.show();
+            screenDownloaderList.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +75,7 @@ public class Main extends Application {
             frameSaveAsFile.setScene(new Scene(root));
             frameSaveAsFile.setResizable(false);
             frameSaveAsFile.initModality(Modality.APPLICATION_MODAL);
-            frameSaveAsFile.initOwner(frameDownloaderList);
+            frameSaveAsFile.initOwner(screenDownloaderList);
             frameSaveAsFile.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +91,7 @@ public class Main extends Application {
             frameImportFile.setScene(new Scene(root));
             frameImportFile.setResizable(false);
             frameImportFile.initModality(Modality.APPLICATION_MODAL);
-            frameImportFile.initOwner(frameDownloaderList);
+            frameImportFile.initOwner(screenDownloaderList);
             frameImportFile.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,7 +108,7 @@ public class Main extends Application {
             frameStartDownload.setScene(new Scene(root));
             frameStartDownload.setResizable(false);
             frameStartDownload.initModality(Modality.APPLICATION_MODAL);
-            frameStartDownload.initOwner(frameDownloaderList);
+            frameStartDownload.initOwner(screenDownloaderList);
             frameStartDownload.show();
 
             frameStartDownload.setOnCloseRequest(event -> {

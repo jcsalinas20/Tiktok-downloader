@@ -22,7 +22,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import static application.Main.frameDownloaderList;
+import static application.Main.screenDownloaderList;
 import static css.StylesCSS.defaultTextField;
 import static css.StylesCSS.errorTextField;
 
@@ -166,7 +166,7 @@ public class DownloaderList extends Application implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         btnExamine.setOnAction(e -> {
             directoryChooser.setInitialDirectory(new File(tfPath.getText()));
-            File selectedDirectory = directoryChooser.showDialog(frameDownloaderList);
+            File selectedDirectory = directoryChooser.showDialog(screenDownloaderList);
             if (selectedDirectory != null)
                 tfPath.setText(selectedDirectory.getAbsolutePath());
         });
@@ -298,21 +298,14 @@ public class DownloaderList extends Application implements Initializable {
         listLinks.setItems(itemsListView);
 
         Label menuDownloadListLabel = new Label("Download List");
-        menuDownloadListLabel.setOnMouseClicked(event -> {
-
-        });
         menuDownloadList.setGraphic(menuDownloadListLabel);
 
         Label menuAllUserVideosLabel = new Label("All User Videos");
-        menuAllUserVideosLabel.setOnMouseClicked(event -> {
-
-        });
+        menuAllUserVideosLabel.setOnMouseClicked(event -> main.showScreenAllUserVideos());
         menuAllUserVideos.setGraphic(menuAllUserVideosLabel);
 
         Label menuOneVideoLabel = new Label("One Video");
-        menuOneVideoLabel.setOnMouseClicked(event -> {
-
-        });
+        menuOneVideoLabel.setOnMouseClicked(event -> main.showScreenOneVideo());
         menuOneVideo.setGraphic(menuOneVideoLabel);
     }
 
