@@ -16,9 +16,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 import static application.downloadList.DownloaderList.itemsListView;
 import static application.Main.screenDownloaderList;
@@ -110,6 +108,7 @@ public class ImportFile extends Application implements Initializable {
             if (itemsListView.size() > 0) confirm = showAlert("New List Urls", "The content of the list is not empty.\nAre you sure you want to remove the links?");
             if (confirm) {
                 ObservableList<String> newListUrl = FXCollections.observableArrayList();
+                Map<String, String> linksMap = new HashMap<>();
                 listTextFlow.clear();
                 setInstructionTextFlow();
                 createText("title", "\nStart Import\n");
@@ -122,9 +121,11 @@ public class ImportFile extends Application implements Initializable {
                     Scanner lector = new Scanner(file);
                     while (lector.hasNextLine()) {
                         String url = lector.nextLine().split("\\?")[0];
+                        String[] separateUrl = url.split("/");
+                        String id = separateUrl[separateUrl.length-1];
                         if (validateUrlTikTok(url)) {
-                            if (!newListUrl.contains(url)) {
-                                newListUrl.add(url);
+                            if (!linksMap.containsKey(id)) {
+                                linksMap.put(id, url);
                                 createText("success-text", index+":\t"+url+"\n");
                             } else createText("error-text", index+":\t"+url+" - duplicate URL\n");
                             //createText("error-text", index+":\t"+url+" - broken URL\n");
@@ -144,6 +145,9 @@ public class ImportFile extends Application implements Initializable {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+                TreeMap<String, String> sorted = new TreeMap<>(linksMap);
+                for (String i : sorted.keySet())
+                    newListUrl.add(sorted.get(i));
                 downloaderList.addNewList(newListUrl);
             }
         }
@@ -158,7 +162,9 @@ public class ImportFile extends Application implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfPath.setText(System.getProperty("user.home") + File.separator + ".txt");
+
+        tfPath.setText("/home/zell_zdark/Imágenes/my_videos/TIKTOK/.txt");
+        //tfPath.setText(System.getProperty("user.home") + File.separator + ".txt");
         createFileChooser();
 
         listTextFlow = tFlowImports.getChildren();

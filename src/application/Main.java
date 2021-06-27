@@ -4,6 +4,7 @@ import application.downloadList.StartDownload;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -22,11 +23,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/downloadList/DownloaderList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/downloadList/DownloaderList.fxml"));
             Scene scene = new Scene(root, 840, 580);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Tiktok Downloader");
             primaryStage.setResizable(false);
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon.png")));
             screenDownloaderList = primaryStage;
             screenDownloaderList.show();
         } catch (Exception e) {
@@ -36,7 +38,7 @@ public class Main extends Application {
 
     public void showScreenAllUserVideos() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/allUserVideos/AllUserVideos.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/allUserVideos/AllUserVideos.fxml"));
             Parent root = loader.load();
             screenAllUserVideos = new Stage();
             screenAllUserVideos.setTitle("All User Videos");
@@ -52,7 +54,7 @@ public class Main extends Application {
 
     public void showScreenOneVideo() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/oneVideo/OneVideo.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/oneVideo/OneVideo.fxml"));
             Parent root = loader.load();
             screenOneVideo = new Stage();
             screenOneVideo.setTitle("One Video");
@@ -68,7 +70,7 @@ public class Main extends Application {
 
     public void showFrameSaveAsFile() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/downloadList/SaveAsFile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/downloadList/SaveAsFile.fxml"));
             Parent root = loader.load();
             frameSaveAsFile = new Stage();
             frameSaveAsFile.setTitle("Save As File");
@@ -84,7 +86,7 @@ public class Main extends Application {
 
     public void showFrameImportFile() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/downloadList/ImportFile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/downloadList/ImportFile.fxml"));
             Parent root = loader.load();
             frameImportFile = new Stage();
             frameImportFile.setTitle("Import File");
@@ -101,7 +103,7 @@ public class Main extends Application {
     @SuppressWarnings("deprecation")
     public void showFrameStartDownload() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/downloadList/StartDownload.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/downloadList/StartDownload.fxml"));
             Parent root = loader.load();
             frameStartDownload = new Stage();
             frameStartDownload.setTitle("Start Download");

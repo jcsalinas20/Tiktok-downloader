@@ -1,12 +1,21 @@
 package application.downloadList;
 
+import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
+import application.DataBaseIds;
 import application.Main;
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -15,12 +24,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import javax.swing.*;
 
 import static application.Main.screenDownloaderList;
 import static css.StylesCSS.defaultTextField;
@@ -165,7 +180,11 @@ public class DownloaderList extends Application implements Initializable {
     private void createDirectoryChooser() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         btnExamine.setOnAction(e -> {
-            directoryChooser.setInitialDirectory(new File(tfPath.getText()));
+            if (new File(tfPath.getText()).exists()) {
+                directoryChooser.setInitialDirectory(new File(tfPath.getText()));
+            } else {
+                directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            }
             File selectedDirectory = directoryChooser.showDialog(screenDownloaderList);
             if (selectedDirectory != null)
                 tfPath.setText(selectedDirectory.getAbsolutePath());
@@ -173,8 +192,8 @@ public class DownloaderList extends Application implements Initializable {
     }
 
     private void createImageLogo() {
-        File file = new File("src/images/logo.png");
-        Image image = new Image(file.toURI().toString());
+        URL localUrl = Objects.requireNonNull(getClass().getClassLoader().getResource("images/logo.png"));
+        Image image = new Image(localUrl.toString());
         imageLogo.setImage(image);
     }
 
@@ -291,7 +310,9 @@ public class DownloaderList extends Application implements Initializable {
         tfTikTokNameOnKeyTyped();
         tfUrlKeyListener();
 
-        tfPath.setText(System.getProperty("user.home"));
+        tfTikTokName.setText("test");
+
+        tfPath.setText(System.getProperty("user.home")+"/Imágenes/my_videos/TIKTOK/");
 
         listLinks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         listLinks.getItems().clear();
@@ -307,6 +328,41 @@ public class DownloaderList extends Application implements Initializable {
         Label menuOneVideoLabel = new Label("One Video");
         menuOneVideoLabel.setOnMouseClicked(event -> main.showScreenOneVideo());
         menuOneVideo.setGraphic(menuOneVideoLabel);
+
+
+        tfUrl.setText("https://www.tiktok.com/@nat_dancer2/video/6977774170515967237");
+        insertRow();
+        tfUrl.setText("https://www.tiktok.com/@lynaperezz/video/6978205406682287365");
+        insertRow();
+
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "ids.data");
+        try {
+//			INTRODUCCION DE 5 JUGADORES
+            introPlayer(db);
+
+//			MOSTRAR JUGADORES
+            listarJugadores(db);
+        } finally {
+            db.close();
+        }
+    }
+    private static void listarJugadores(ObjectContainer db) {
+        DataBaseIds player = new DataBaseIds(null, null, 0, null);
+        ObjectSet<Object> result = db.queryByExample(player);
+        for (Object o : result) {
+            System.out.println(o);
+        }
+    }
+
+    private static final SimpleDateFormat sdf3 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    private static void introPlayer(ObjectContainer db) {
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+
+        DataBaseIds player = new DataBaseIds("nat_dancer2", "https://www.tiktok.com/@nat_dancer2/video/6977774170515967237", Long.parseLong("6977774170515967237"), sdf3.format(timestamp));
+        db.store(player);
+        player = new DataBaseIds("lynaperezz", "https://www.tiktok.com/@lynaperezz/video/6978205406682287365", Long.parseLong("6978205406682287365"), sdf3.format(timestamp));
+        db.store(player);
     }
 
     @Override

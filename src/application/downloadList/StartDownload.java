@@ -17,7 +17,10 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -45,6 +48,7 @@ public class StartDownload extends Application implements Initializable {
     public static ObservableList<String> listUrl;
     ObservableList<Node> listTextFlow;
     public static Thread thread;
+    int numLine = 0;
 
     /***************************** METHODS *****************************/
 
@@ -87,8 +91,98 @@ public class StartDownload extends Application implements Initializable {
     private void readListToStartCommand(File file) {
         String commandOS = (System.getProperty("os.name").equals("Linux")) ? "/bin/bash" : "cmd";
         String options = (System.getProperty("os.name").equals("Linux")) ? "-c" : "/C";
-        for (String link : StartDownload.listUrl)
-            runCommand(commandOS, options, "tiktok-scraper video "+link+" -d -w false --filepath '"+file.getParent()+"'");
+        numLine = 1;
+        boolean nodeInstalled = checkNodeJS(commandOS, options, "node -v");
+        boolean npmInstalled = checkNpm(commandOS, options, "npm -v");
+        boolean tiktokScraperInstalled = checkTiktokScraper(commandOS, options, "tiktok-scraper --version");
+        if (nodeInstalled && npmInstalled && tiktokScraperInstalled)
+            for (String link : StartDownload.listUrl)
+                runCommand(commandOS, options, "tiktok-scraper video "+link+" -d -w false --filepath '"+file.getParent()+"'");
+    }
+
+    private boolean checkTiktokScraper(String... command) {
+        ProcessBuilder processBuilder = new ProcessBuilder().command(command);
+        try {
+            Process process = processBuilder.start();
+
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String output = bufferedReader.readLine();
+            boolean status = false;
+
+            if (output != null) {
+                Platform.runLater(() -> createText("normal-text", "TikTok Scraper: "));
+                Platform.runLater(() -> createText("success-text", "installed \n"));
+                status = true;
+            }else {
+                Platform.runLater(() -> createText("error-text", "TikTok Scraper is not installed.\n"));
+                Platform.runLater(() -> createText("error-text", "Run \"npm i -g tiktok-scraper\".\n"));
+            }
+
+            process.waitFor();
+            bufferedReader.close();
+            process.destroy();
+            return status;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean checkNpm(String... command) {
+        ProcessBuilder processBuilder = new ProcessBuilder().command(command);
+        try {
+            Process process = processBuilder.start();
+
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String output = bufferedReader.readLine();
+            boolean status = false;
+
+            if (output != null) {
+                Platform.runLater(() -> createText("normal-text", "Npm version: " + output + "\n"));
+                status = true;
+            }else {
+                Platform.runLater(() -> createText("error-text", "Npm is not installed.\n"));
+                Platform.runLater(() -> createText("error-text", "Run \"sudo apt install npm\".\n"));
+            }
+
+            process.waitFor();
+            bufferedReader.close();
+            process.destroy();
+            return status;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean checkNodeJS(String... command) {
+        ProcessBuilder processBuilder = new ProcessBuilder().command(command);
+        try {
+            Process process = processBuilder.start();
+
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String output = bufferedReader.readLine();
+            boolean statusNode = false;
+
+            if (output != null) {
+                Platform.runLater(() -> createText("normal-text", "Node version: " + output + "\n"));
+                statusNode = true;
+            }else {
+                Platform.runLater(() -> createText("error-text", "Node is not installed.\n"));
+                Platform.runLater(() -> createText("error-text", "Run \"sudo apt install nodejs\".\n"));
+            }
+
+            process.waitFor();
+            bufferedReader.close();
+            process.destroy();
+            return statusNode;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private void runCommand(String... command) {
@@ -98,13 +192,16 @@ public class StartDownload extends Application implements Initializable {
 
             InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String output;
-            while ((output = bufferedReader.readLine()) != null) {
-                System.out.println(output);
-                String finalOutput = output;
-                Platform.runLater(() -> createText("normal-text", finalOutput +"\n"));
-            }
+            String output = bufferedReader.readLine();
+            String link = command[2].split("tiktok-scraper video ")[1].split(" -d -w ")[0];
+
+            if (output != null)
+                Platform.runLater(() -> createText("normal-text", numLine + ": " + output +"\n"));
+            else
+                Platform.runLater(() -> createText("error-text", numLine + ": Not supported, "+ link +"\n"));
+
             process.waitFor();
+            numLine++;
 
             bufferedReader.close();
             process.destroy();
@@ -117,11 +214,13 @@ public class StartDownload extends Application implements Initializable {
 
     @FXML
     private void btnOpenFolderOnClick() {
-        try {
-            Desktop.getDesktop().open(new File(lblFolderPath.getText()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new Thread(() -> {
+            try {
+                Desktop.getDesktop().open(new File(lblFolderPath.getText()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     /************************ METHODS INITIALIZE ************************/
