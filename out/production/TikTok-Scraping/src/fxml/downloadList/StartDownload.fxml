@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="600.0" maxWidth="864.0" minHeight="243.0" minWidth="712.0" prefHeight="354.0" prefWidth="714.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="application.downloadList.StartDownload">
+  <Label fx:id="lblFolderPath" layoutX="169.0" layoutY="25.0" prefHeight="22.0" prefWidth="520.0">
+     <font>
+        <Font name="Comic Sans MS" size="15.0" />
+     </font>
+  </Label>
+    <Button fx:id="btnOpenFolder" alignment="CENTER" layoutX="28.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnOpenFolderOnClick" prefHeight="32.0" prefWidth="125.0" text="Open Folder">
+        <font>
+            <Font name="Comic Sans MS" size="15.0" />
+        </font>
+    </Button>
+  <ScrollPane fx:id="scrollPane" layoutX="28.0" layoutY="66.0" prefHeight="265.0" prefWidth="662.0" styleClass="text-flow-panel" stylesheets="@../../css/application.css">
+     <TextFlow fx:id="tFlowImports" prefHeight="263.0" prefWidth="647.0" styleClass="text-flow" stylesheets="@../../css/application.css">
+        <padding>
+           <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+        </padding>
+     </TextFlow>
+  </ScrollPane>
+</AnchorPane>

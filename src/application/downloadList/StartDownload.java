@@ -1,5 +1,9 @@
 package application.downloadList;
 
+import application.DataBaseIds;
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -20,7 +24,10 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -185,6 +192,7 @@ public class StartDownload extends Application implements Initializable {
         return false;
     }
 
+    private static final SimpleDateFormat sdf3 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private void runCommand(String... command) {
         ProcessBuilder processBuilder = new ProcessBuilder().command(command);
         try {
@@ -195,10 +203,25 @@ public class StartDownload extends Application implements Initializable {
             String output = bufferedReader.readLine();
             String link = command[2].split("tiktok-scraper video ")[1].split(" -d -w ")[0];
 
-            if (output != null)
-                Platform.runLater(() -> createText("normal-text", numLine + ": " + output +"\n"));
-            else
-                Platform.runLater(() -> createText("error-text", numLine + ": Not supported, "+ link +"\n"));
+            if (output != null) {
+                Platform.runLater(() -> createText("normal-text", numLine + ": " + output + "\n"));
+                ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "ids.cfg");
+                try {
+                    Date date = new Date();
+                    Timestamp timestamp = new Timestamp(date.getTime());
+                    String[] url = link.split("/");
+                    boolean exist = getVideoId(url[5], db);
+
+                    if (!exist) {
+                        DataBaseIds video = new DataBaseIds(url[3].replace("@", ""), link, Long.parseLong(url[5]), sdf3.format(timestamp));
+                        db.store(video);
+                    }
+                } finally {
+                    db.close();
+                }
+            } else {
+                Platform.runLater(() -> createText("error-text", numLine + ": Not supported, " + link + "\n"));
+            }
 
             process.waitFor();
             numLine++;
@@ -208,6 +231,12 @@ public class StartDownload extends Application implements Initializable {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static boolean getVideoId(String videoId, ObjectContainer db) {
+        DataBaseIds videos = new DataBaseIds(null, null, Long.parseLong(videoId), null);
+        ObjectSet<Object> ids = db.queryByExample(videos);
+        return ids.size() > 0;
     }
 
     /*************************** METHODS FXML***************************/

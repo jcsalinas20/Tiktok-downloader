@@ -1,8 +1,12 @@
 package application.downloadList;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -291,6 +295,47 @@ public class DownloaderList extends Application implements Initializable {
     }
 
     @FXML
+    private void openSelectedLink() {
+        ObservableList<Integer> positions = listLinks.getSelectionModel().getSelectedIndices();
+        for (Integer position : positions) {
+            new Thread(() -> {
+                try {
+                    listLinks.getSelectionModel().clearAndSelect(position);
+                    URI link = new URI(listLinks.getItems().get(position));
+                    Desktop.getDesktop().browse(link);
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            break;
+        }
+    }
+
+    @FXML
+    private void copySelectedLink() {
+        ObservableList<Integer> positions = listLinks.getSelectionModel().getSelectedIndices();
+        for (Integer position : positions) {
+            listLinks.getSelectionModel().clearAndSelect(position);
+            StringSelection link = new StringSelection(listLinks.getItems().get(position));
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(link, null);
+            break;
+        }
+    }
+
+    @FXML
+    private void deleteSelectedLink() {
+        ObservableList<Integer> positions = listLinks.getSelectionModel().getSelectedIndices();
+        for (int i = positions.size() - 1; i >= 0; i--)
+            listLinks.getItems().remove((int) positions.get(i));
+    }
+
+    @FXML
+    private void deleteAllLinks() {
+        listLinks.getItems().clear();
+    }
+
+    @FXML
     private void tfNameKeyReleased() {
         setDefaultColorsTextField(0, tfTikTokName);
     }
@@ -310,7 +355,7 @@ public class DownloaderList extends Application implements Initializable {
         tfTikTokNameOnKeyTyped();
         tfUrlKeyListener();
 
-        tfTikTokName.setText("test");
+        //tfTikTokName.setText("test");
 
         tfPath.setText(System.getProperty("user.home")+"/Imágenes/my_videos/TIKTOK/");
 
@@ -330,39 +375,10 @@ public class DownloaderList extends Application implements Initializable {
         menuOneVideo.setGraphic(menuOneVideoLabel);
 
 
-        tfUrl.setText("https://www.tiktok.com/@nat_dancer2/video/6977774170515967237");
+        /*tfUrl.setText("https://www.tiktok.com/@nat_dancer2/video/6977774170515967237");
         insertRow();
         tfUrl.setText("https://www.tiktok.com/@lynaperezz/video/6978205406682287365");
-        insertRow();
-
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "ids.data");
-        try {
-//			INTRODUCCION DE 5 JUGADORES
-            introPlayer(db);
-
-//			MOSTRAR JUGADORES
-            listarJugadores(db);
-        } finally {
-            db.close();
-        }
-    }
-    private static void listarJugadores(ObjectContainer db) {
-        DataBaseIds player = new DataBaseIds(null, null, 0, null);
-        ObjectSet<Object> result = db.queryByExample(player);
-        for (Object o : result) {
-            System.out.println(o);
-        }
-    }
-
-    private static final SimpleDateFormat sdf3 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    private static void introPlayer(ObjectContainer db) {
-        Date date = new Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
-
-        DataBaseIds player = new DataBaseIds("nat_dancer2", "https://www.tiktok.com/@nat_dancer2/video/6977774170515967237", Long.parseLong("6977774170515967237"), sdf3.format(timestamp));
-        db.store(player);
-        player = new DataBaseIds("lynaperezz", "https://www.tiktok.com/@lynaperezz/video/6978205406682287365", Long.parseLong("6978205406682287365"), sdf3.format(timestamp));
-        db.store(player);
+        insertRow();*/
     }
 
     @Override
