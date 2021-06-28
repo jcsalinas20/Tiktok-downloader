@@ -6,21 +6,9 @@
 
 ``` sudo apt install openjdk-11-jre ```
 
-### Install JavaFX ([web](https://gluonhq.com/products/javafx/))
-
-Download JavaFX 11: [Download](https://gluonhq.com/download/javafx-11-0-2-sdk-linux/)
+### Install JavaFX
 
 Install: ``` sudo apt install openjfx ```
-
-Extract zip file: ``` unzip <zip_file> ```
-
-Move JavaFX folder: ``` sudo mv <javafx_folder> /usr/lib/jvm/ ```
-
-Create ENV variable: ``` sudo nano /etc/profile ```
-
-In the bottom of the file put: ``` export PATH_TO_FX="/usr/lib/jvm/<javafx_folder>/lib" ```
-
-Save the file and execute: ``` source /etc/profile ```
 
 ## Program Problems
 
