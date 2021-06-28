@@ -8,7 +8,7 @@
 
 ### Install JavaFX
 
-Install: ``` sudo apt install openjfx ```
+``` sudo apt install openjfx ```
 
 ## Program Problems
 
