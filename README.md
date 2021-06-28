@@ -1,6 +1,6 @@
 # Tiktok-downloader
 
-## Instalación Ubuntu 20.04
+## Instalación en Ubuntu 20.04
 
 ### Install Java 11
 
@@ -8,15 +8,33 @@
 
 ### Install JavaFX ([web](https://gluonhq.com/products/javafx/))
 
-``` Download JavaFX 11: ``` [Download](https://gluonhq.com/download/javafx-11-0-2-sdk-linux/)
+Download JavaFX 11: [Download](https://gluonhq.com/download/javafx-11-0-2-sdk-linux/)
+
+Install: ``` sudo apt install openjfx ```
+
+Extract zip file: ``` unzip <zip_file> ```
+
+Move JavaFX folder: ``` sudo mv <javafx_folder> /usr/lib/jvm/ ```
+
+Create ENV variable: ``` sudo nano /etc/profile ```
+
+In the bottom of the file put: ``` export PATH_TO_FX="/usr/lib/jvm/<javafx_folder>/lib" ```
+
+Save the file and execute: ``` source /etc/profile ```
+
+## Program Problems
+
+### Node is not installed
 
 ``` sudo apt install nodejs ```
 
+### Npm is not installed
+
 ``` sudo apt install npm ```
 
-``` npm i -g tiktok-scraper ```
+### TikTok Scraper is not installed
 
-## Problemas
+``` npm i -g tiktok-scraper ```
 
 Si tinenes instalado node o npm y no te lo detecta el programa pero si en la terminal ejecuta este linea de commando en tu terminal.
 
