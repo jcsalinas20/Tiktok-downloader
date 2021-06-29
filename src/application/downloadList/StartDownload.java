@@ -123,7 +123,8 @@ public class StartDownload extends Application implements Initializable {
                 status = true;
             }else {
                 Platform.runLater(() -> createText("error-text", "TikTok Scraper is not installed.\n"));
-                Platform.runLater(() -> createText("error-text", "Run \"npm i -g tiktok-scraper\".\n"));
+                Platform.runLater(() -> createText("error-text", "Run "));
+                Platform.runLater(() -> createText("normal-text", "npm i -g tiktok-scraper\n"));
             }
 
             process.waitFor();
@@ -151,7 +152,8 @@ public class StartDownload extends Application implements Initializable {
                 status = true;
             }else {
                 Platform.runLater(() -> createText("error-text", "Npm is not installed.\n"));
-                Platform.runLater(() -> createText("error-text", "Run \"sudo apt install npm\".\n"));
+                Platform.runLater(() -> createText("error-text", "Run "));
+                Platform.runLater(() -> createText("normal-text", "sudo apt install npm\n"));
             }
 
             process.waitFor();
@@ -179,7 +181,14 @@ public class StartDownload extends Application implements Initializable {
                 statusNode = true;
             }else {
                 Platform.runLater(() -> createText("error-text", "Node is not installed.\n"));
-                Platform.runLater(() -> createText("error-text", "Run \"sudo apt install nodejs\".\n"));
+
+                if (System.getProperty("os.name").equals("Linux")) {
+                    Platform.runLater(() -> createText("error-text", "Run "));
+                    Platform.runLater(() -> createText("normal-text", "sudo apt install nodejs\n"));
+                } else {
+                    Platform.runLater(() -> createText("error-text", "Download and install.\n"));
+                    Platform.runLater(() -> createText("normal-text", "<i>https://nodejs.org/en/download/</i>\n"));
+                }
             }
 
             process.waitFor();

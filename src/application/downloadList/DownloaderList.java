@@ -355,9 +355,8 @@ public class DownloaderList extends Application implements Initializable {
         tfTikTokNameOnKeyTyped();
         tfUrlKeyListener();
 
-        //tfTikTokName.setText("test");
-
-        tfPath.setText(System.getProperty("user.home")+"/Imágenes/my_videos/TIKTOK/");
+        tfPath.setText(System.getProperty("user.home"));
+        //tfPath.setText(System.getProperty("user.home")+"/Imágenes/my_videos/TIKTOK/");
 
         listLinks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         listLinks.getItems().clear();
@@ -374,11 +373,13 @@ public class DownloaderList extends Application implements Initializable {
         menuOneVideoLabel.setOnMouseClicked(event -> main.showScreenOneVideo());
         menuOneVideo.setGraphic(menuOneVideoLabel);
 
-
-        /*tfUrl.setText("https://www.tiktok.com/@nat_dancer2/video/6977774170515967237");
+        /*
+        tfTikTokName.setText("test");
+        tfUrl.setText("https://www.tiktok.com/@nat_dancer2/video/6977774170515967237");
         insertRow();
         tfUrl.setText("https://www.tiktok.com/@lynaperezz/video/6978205406682287365");
-        insertRow();*/
+        insertRow();
+         */
     }
 
     @Override
