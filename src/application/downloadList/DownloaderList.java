@@ -8,18 +8,11 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
-import application.DataBaseIds;
 import application.Main;
-import com.db4o.Db4oEmbedded;
-import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -38,8 +31,6 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import javax.swing.*;
 
 import static application.Main.screenDownloaderList;
 import static css.StylesCSS.defaultTextField;

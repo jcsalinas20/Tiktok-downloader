@@ -21,12 +21,9 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -271,12 +268,13 @@ public class StartDownload extends Application implements Initializable {
         tFlowImports.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
         scrollPane.setVvalue(1.0);
 
-        Task<Void> task = new Task<Void>() {
-            @Override protected Void call() {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() {
                 Platform.runLater(() -> createText("title", "Start Download\n"));
                 if (createFolder(StartDownload.file))
                     readListToStartCommand(StartDownload.file);
-                else  {
+                else {
                     showErrorAlert("Start Download Error", "Error to create destination folder");
                     closeWindow();
                 }
