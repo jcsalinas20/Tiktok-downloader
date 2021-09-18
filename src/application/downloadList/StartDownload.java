@@ -95,13 +95,15 @@ public class StartDownload extends Application implements Initializable {
     private void readListToStartCommand(File file) {
         String commandOS = (System.getProperty("os.name").equals("Linux")) ? "/bin/bash" : "cmd";
         String options = (System.getProperty("os.name").equals("Linux")) ? "-c" : "/C";
+        String path = file.getParent();
+        if (path.contains(" ")) path = "\"" + path;
         numLine = 1;
         boolean nodeInstalled = checkNodeJS(commandOS, options, "node -v");
         boolean npmInstalled = checkNpm(commandOS, options, "npm -v");
         boolean tiktokScraperInstalled = checkTiktokScraper(commandOS, options, "tiktok-scraper --version");
         if (nodeInstalled && npmInstalled && tiktokScraperInstalled)
             for (String link : StartDownload.listUrl)
-                runCommand(commandOS, options, "tiktok-scraper video "+link+" -d -w false --filepath '"+file.getParent()+"'");
+                runCommand(commandOS, options, "tiktok-scraper video "+link+" -d -w false --filepath '"+path+"'");
     }
 
     private boolean checkTiktokScraper(String... command) {

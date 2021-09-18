@@ -54,7 +54,11 @@ public class SaveAsFile  extends Application implements Initializable {
     private void createDirectoryChooser() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         btnExamine.setOnAction(e -> {
-            directoryChooser.setInitialDirectory(new File(tfPath.getText()).getParentFile());
+            if (new File(tfPath.getText()).getParentFile().exists()) {
+                directoryChooser.setInitialDirectory(new File(tfPath.getText()).getParentFile());
+            } else {
+                directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")).getParentFile());
+            }
             File selectedDirectory = directoryChooser.showDialog(screenDownloaderList);
             if (selectedDirectory != null) {
                 tfPath.setText(selectedDirectory.getAbsolutePath());

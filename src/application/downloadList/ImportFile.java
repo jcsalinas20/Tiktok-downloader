@@ -56,7 +56,11 @@ public class ImportFile extends Application implements Initializable {
     private void createFileChooser() {
         FileChooser fileChooser = new FileChooser();
         btnExamine.setOnAction(e -> {
-            fileChooser.setInitialDirectory(new File(tfPath.getText()).getParentFile());
+            if (new File(tfPath.getText()).getParentFile().exists()) {
+                fileChooser.setInitialDirectory(new File(tfPath.getText()).getParentFile());
+            } else {
+                fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + File.separator + ".txt").getParentFile());
+            }
             File selectedFile = fileChooser.showOpenDialog(screenDownloaderList);
             if (selectedFile != null)
                 tfPath.setText(selectedFile.getAbsolutePath());
