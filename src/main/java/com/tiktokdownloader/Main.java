@@ -51,7 +51,15 @@ public class Main extends Application {
             screenDownloaderList.initModality(Modality.APPLICATION_MODAL);
             screenDownloaderList.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenDownloaderList.show();
-            screenAllUserVideos.close();
+            if (screenAllUserVideos != null) {
+                screenAllUserVideos.close();
+            }
+            if (screenOneVideo != null) {
+                screenOneVideo.close();
+            }
+            if (screenLogs != null) {
+                screenLogs.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +76,15 @@ public class Main extends Application {
             screenAllUserVideos.initModality(Modality.APPLICATION_MODAL);
             screenAllUserVideos.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenAllUserVideos.show();
-            screenDownloaderList.close();
+            if (screenDownloaderList != null) {
+                screenDownloaderList.close();
+            }
+            if (screenOneVideo != null) {
+                screenOneVideo.close();
+            }
+            if (screenLogs != null) {
+                screenLogs.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,7 +101,15 @@ public class Main extends Application {
             screenOneVideo.initModality(Modality.APPLICATION_MODAL);
             screenOneVideo.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenOneVideo.show();
-            screenDownloaderList.close();
+            if (screenDownloaderList != null) {
+                screenDownloaderList.close();
+            }
+            if (screenAllUserVideos != null) {
+                screenAllUserVideos.close();
+            }
+            if (screenLogs != null) {
+                screenLogs.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,7 +126,15 @@ public class Main extends Application {
             screenLogs.initModality(Modality.APPLICATION_MODAL);
             screenLogs.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenLogs.show();
-            screenDownloaderList.close();
+            if (screenDownloaderList != null) {
+                screenDownloaderList.close();
+            }
+            if (screenOneVideo != null) {
+                screenOneVideo.close();
+            }
+            if (screenAllUserVideos != null) {
+                screenAllUserVideos.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

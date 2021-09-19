@@ -9,6 +9,7 @@
         <Menu fx:id="menuDownloadList" mnemonicParsing="false" />
         <Menu fx:id="menuAllUserVideos" mnemonicParsing="false" />
         <Menu fx:id="menuOneVideo" mnemonicParsing="false" />
+        <Menu fx:id="menuLogs" mnemonicParsing="false" />
         <styleClass>
             <String fx:value="menu-text" />
         </styleClass>

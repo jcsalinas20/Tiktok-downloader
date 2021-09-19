@@ -24,6 +24,9 @@ public class AllUserVideos extends Application implements Initializable {
     @FXML
     Menu menuOneVideo;
 
+    @FXML
+    Menu menuLogs;
+
     /**************************** VARIABLES ****************************/
 
     Main main = new Main();
@@ -46,6 +49,10 @@ public class AllUserVideos extends Application implements Initializable {
         Label menuOneVideoLabel = new Label("One Video");
         menuOneVideoLabel.setOnMouseClicked(event -> main.showScreenOneVideo());
         menuOneVideo.setGraphic(menuOneVideoLabel);
+
+        Label menuLogsLabel = new Label("Logs");
+        menuLogsLabel.setOnMouseClicked(event -> main.showScreenLogs());
+        menuLogs.setGraphic(menuLogsLabel);
     }
 
     @Override
