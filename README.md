@@ -1,6 +1,15 @@
 # Tiktok-downloader
 
-## Installation en Ubuntu 20.04
+## Index
+ * [Windows 10 Installation](#windows-10-installation)
+ * [Ubuntu 20.04 Installation](#ubuntu-2004-installation)
+ * [Program Problems](#program-problems)
+
+## Windows 10 Installation
+
+### 1. A
+
+## Ubuntu 20.04 Installation
 
 ### 1. Install Java 11
 
