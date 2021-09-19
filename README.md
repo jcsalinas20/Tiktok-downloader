@@ -2,13 +2,32 @@
 
 ## Installation en Ubuntu 20.04
 
-### Install Java 11
+### 1. Install Java 11
 
-``` sudo apt install openjdk-11-jre ```
+```
+sudo apt install openjdk-11-jre 
+```
 
-### Install JavaFX
+### 2. Install JavaFX
 
-``` sudo apt install openjfx ```
+``` 
+sudo apt install openjfx 
+```
+
+### 3. Install Node and npm
+
+``` 
+sudo apt install nodejs npm
+```
+
+### 4. Install tiktok-scraper
+
+``` 
+sudo npm i -g tiktok-scraper
+```
+
+
+<br />
 
 ## Program Problems
 
