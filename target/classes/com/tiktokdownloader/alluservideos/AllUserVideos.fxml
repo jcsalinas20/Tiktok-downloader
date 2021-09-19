@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+
+<AnchorPane maxHeight="600.0" maxWidth="864.0" minHeight="578.0" minWidth="720.0" prefHeight="598.0" prefWidth="851.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tiktokdownloader.alluservideos.AllUserVideos">
+    <MenuBar layoutY="2.0" stylesheets="@../application.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Menu fx:id="menuDownloadList" mnemonicParsing="false" />
+        <Menu fx:id="menuAllUserVideos" mnemonicParsing="false" />
+        <Menu fx:id="menuOneVideo" mnemonicParsing="false" />
+        <styleClass>
+            <String fx:value="menu-text" />
+        </styleClass>
+    </MenuBar>
+</AnchorPane>

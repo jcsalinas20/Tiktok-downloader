@@ -1,6 +1,6 @@
 # Tiktok-downloader
 
-## Instalación en Ubuntu 20.04
+## Installation en Ubuntu 20.04
 
 ### Install Java 11
 
