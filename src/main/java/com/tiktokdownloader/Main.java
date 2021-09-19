@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import java.util.Objects;
+
 public class Main extends Application {
 
     public static Stage screenDownloaderList;
@@ -25,13 +27,30 @@ public class Main extends Application {
         try {
             FXMLLoader root = new FXMLLoader(Main.class.getResource("downloadlist/DownloaderList.fxml"));
             Scene scene = new Scene(root.load(), 840, 580);
-            scene.getStylesheets().add(getClass().getResource("application.css").toString());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toString());
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Tiktok Downloader");
+            primaryStage.setTitle("Tiktok Downloader - Download List");
             primaryStage.setResizable(false);
-            primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.png")));
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenDownloaderList = primaryStage;
             screenDownloaderList.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showScreenDownloadList() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("downloadlist/DownloaderList.fxml"));
+            Parent root = loader.load();
+            screenDownloaderList = new Stage();
+            screenDownloaderList.setTitle("Tiktok Downloader - Download List");
+            screenDownloaderList.setScene(new Scene(root));
+            screenDownloaderList.setResizable(false);
+            screenDownloaderList.initModality(Modality.APPLICATION_MODAL);
+            screenDownloaderList.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
+            screenDownloaderList.show();
+            screenAllUserVideos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,10 +61,11 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("alluservideos/AllUserVideos.fxml"));
             Parent root = loader.load();
             screenAllUserVideos = new Stage();
-            screenAllUserVideos.setTitle("All User Videos");
+            screenAllUserVideos.setTitle("Tiktok Downloader - All User Videos");
             screenAllUserVideos.setScene(new Scene(root));
             screenAllUserVideos.setResizable(false);
             screenAllUserVideos.initModality(Modality.APPLICATION_MODAL);
+            screenAllUserVideos.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenAllUserVideos.show();
             screenDownloaderList.close();
         } catch (Exception e) {
@@ -58,10 +78,11 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("onevideo/OneVideo.fxml"));
             Parent root = loader.load();
             screenOneVideo = new Stage();
-            screenOneVideo.setTitle("One Video");
+            screenOneVideo.setTitle("Tiktok Downloader - One Video");
             screenOneVideo.setScene(new Scene(root));
             screenOneVideo.setResizable(false);
             screenOneVideo.initModality(Modality.APPLICATION_MODAL);
+            screenOneVideo.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenOneVideo.show();
             screenDownloaderList.close();
         } catch (Exception e) {
@@ -74,10 +95,11 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("downloadlist/SaveAsFile.fxml"));
             Parent root = loader.load();
             frameSaveAsFile = new Stage();
-            frameSaveAsFile.setTitle("Save As File");
+            frameSaveAsFile.setTitle("Tiktok Downloader - Save As File");
             frameSaveAsFile.setScene(new Scene(root));
             frameSaveAsFile.setResizable(false);
             frameSaveAsFile.initModality(Modality.APPLICATION_MODAL);
+            frameSaveAsFile.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             frameSaveAsFile.initOwner(screenDownloaderList);
             frameSaveAsFile.show();
         } catch (Exception e) {
@@ -90,10 +112,11 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("downloadlist/ImportFile.fxml"));
             Parent root = loader.load();
             frameImportFile = new Stage();
-            frameImportFile.setTitle("Import File");
+            frameImportFile.setTitle("Tiktok Downloader - Import File");
             frameImportFile.setScene(new Scene(root));
             frameImportFile.setResizable(false);
             frameImportFile.initModality(Modality.APPLICATION_MODAL);
+            frameImportFile.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             frameImportFile.initOwner(screenDownloaderList);
             frameImportFile.show();
         } catch (Exception e) {
@@ -107,10 +130,11 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("downloadlist/StartDownload.fxml"));
             Parent root = loader.load();
             frameStartDownload = new Stage();
-            frameStartDownload.setTitle("Start Download");
+            frameStartDownload.setTitle("Tiktok Downloader - Start Download");
             frameStartDownload.setScene(new Scene(root));
             frameStartDownload.setResizable(false);
             frameStartDownload.initModality(Modality.APPLICATION_MODAL);
+            frameStartDownload.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             frameStartDownload.initOwner(screenDownloaderList);
             frameStartDownload.show();
 
