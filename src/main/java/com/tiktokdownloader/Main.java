@@ -17,6 +17,7 @@ public class Main extends Application {
     public static Stage screenDownloaderList;
     public static Stage screenAllUserVideos;
     public static Stage screenOneVideo;
+    public static Stage screenLogs;
     public static Stage frameSaveAsFile;
     public static Stage frameImportFile;
     public static Stage frameStartDownload;
@@ -84,6 +85,23 @@ public class Main extends Application {
             screenOneVideo.initModality(Modality.APPLICATION_MODAL);
             screenOneVideo.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
             screenOneVideo.show();
+            screenDownloaderList.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showScreenLogs() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("logs/Logs.fxml"));
+            Parent root = loader.load();
+            screenLogs = new Stage();
+            screenLogs.setTitle("Tiktok Downloader - Logs");
+            screenLogs.setScene(new Scene(root));
+            screenLogs.setResizable(false);
+            screenLogs.initModality(Modality.APPLICATION_MODAL);
+            screenLogs.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
+            screenLogs.show();
             screenDownloaderList.close();
         } catch (Exception e) {
             e.printStackTrace();

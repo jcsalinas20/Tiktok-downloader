@@ -50,6 +50,9 @@ public class DownloaderList extends Application implements Initializable {
     Menu menuOneVideo;
 
     @FXML
+    Menu menuLogs;
+
+    @FXML
     ListView<String> listLinks = new ListView<>();
 
     @FXML
@@ -363,6 +366,10 @@ public class DownloaderList extends Application implements Initializable {
         Label menuOneVideoLabel = new Label("One Video");
         menuOneVideoLabel.setOnMouseClicked(event -> main.showScreenOneVideo());
         menuOneVideo.setGraphic(menuOneVideoLabel);
+
+        Label menuLogsLabel = new Label("Logs");
+        menuLogsLabel.setOnMouseClicked(event -> main.showScreenLogs());
+        menuLogs.setGraphic(menuLogsLabel);
 
         /*
         tfTikTokName.setText("test");
