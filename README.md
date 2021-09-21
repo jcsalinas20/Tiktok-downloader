@@ -3,6 +3,7 @@
 ## Index
  * [Windows 10 Installation](#windows-10-installation)
  * [Ubuntu 20.04 Installation](#ubuntu-2004-installation)
+ * [Run Program]()
  * [Program Problems](#program-problems)
 
 ## Windows 10 Installation
