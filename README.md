@@ -12,6 +12,9 @@
     * [Linux](#)
     * [Windows](#)
  * [Tested Versions](#tested-versions)
+    * [Java](#user-content-java-versions)
+    * [Node](#user-content-node-versions)
+    * [Tiktok-scraper](#user-content-tiktok-scraper-versions)
 
 <br />
 
@@ -113,8 +116,26 @@ sudo npm install -g tiktok-scraper --unsafe-perm=true --allow-root
 
 ## Java Versions
 
+Java Version | Test
+| :---: | :---:
+Java 8 | -
+Java | -
+Java | -
+Java 11 | <img src="http://imgfz.com/i/TlgAGXL.png" width="25px"/>
+
 ## Node Versions
 
+Node Version | Test
+| :---: | :---:
+Node 10.19.0 | <img src="http://imgfz.com/i/TlgAGXL.png" width="25px"/>
+Node | -
+Node | -
+Node | -
+
 ## Tiktok-scraper Versions
+
+Tiktok-scraper Version | Test
+| :---: | :---:
+Tiktok-scraper 1.4.36 | <img src="http://imgfz.com/i/TlgAGXL.png" width="25px"/>
 
 
