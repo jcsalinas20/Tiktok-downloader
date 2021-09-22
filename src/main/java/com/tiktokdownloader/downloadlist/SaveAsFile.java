@@ -215,8 +215,7 @@ public class SaveAsFile  extends Application implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfPath.setText("/home/zell_zdark/Imágenes/my_videos/TIKTOK");
-        //tfPath.setText(System.getProperty("user.home"));
+        tfPath.setText(System.getProperty("user.home"));
 
         createDirectoryChooser();
 
