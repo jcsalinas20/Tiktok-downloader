@@ -96,15 +96,15 @@ java -jar Tiktok-downloader.jar
 
 First right click in the .jar and select Properties
 
-![prop1](http://imgfz.com/i/ZOBTGjJ.png)
+![prop1](https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/runProgramStep1.png)
 
 Then in Permissions select the checkbox
 
-![prop2](http://imgfz.com/i/2xZpg5s.png)
+![prop2](https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/runProgramStep2.png)
 
 And finally in Open With select your Java version
 
-![prop3](http://imgfz.com/i/UuOcvib.png)
+![prop3](https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/runProgramStep3.png)
 
 <br />
 
@@ -138,7 +138,7 @@ sudo npm i -g tiktok-scraper
 
 If you have this error when you try to install tiktok-scraper,
 
-![error-img](http://imgfz.com/i/XxfG0ho.png)
+![error-img](https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/tiktokscraperError.png)
 
 try this ([Link](https://stackoverflow.com/questions/49679808/error-eacces-permission-denied-mkdir-usr-local-lib-node-modules-node-sass-b))
 
@@ -166,7 +166,7 @@ Option 2:
 
 ### Java version conflict ([Solution](#user-content-1-install-java-jdk-11))
 
-<img src="http://imgfz.com/i/1KaG9E2.png" />
+<img src="https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/javaVersionConflict.png" />
 
 <br />
 
@@ -176,20 +176,20 @@ Option 2:
 
 Java Version | Test
 | :---: | :---:
-Java 8 | <img src="http://imgfz.com/i/6qfZ1pw.png" width="25px"/>
-Java 11 | <img src="http://imgfz.com/i/TlgAGXL.png" width="25px"/>
+Java 8 | <img src="https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/error.png" width="25px"/>
+Java 11 | <img src="https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/correct.png" width="25px"/>
 
 ## Node Versions
 
 Node Version | Test
 | :---: | :---:
-Node 10.19.0 | <img src="http://imgfz.com/i/TlgAGXL.png" width="25px"/>
-Node 14.17.6 | <img src="http://imgfz.com/i/TlgAGXL.png" width="25px"/>
+Node 10.19.0 | <img src="https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/correct.png" width="25px"/>
+Node 14.17.6 | <img src="https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/correct.png" width="25px"/>
 
 ## Tiktok-scraper Versions
 
 Tiktok-scraper Version | Test
 | :---: | :---:
-Tiktok-scraper 1.4.36 | <img src="http://imgfz.com/i/TlgAGXL.png" width="25px"/>
+Tiktok-scraper 1.4.36 | <img src="https://raw.githubusercontent.com/jcsalinas20/Tiktok-downloader/main/images/correct.png" width="25px"/>
 
 
