@@ -50,6 +50,9 @@ public class DownloaderList extends Application implements Initializable {
     Menu menuOneVideo;
 
     @FXML
+    Menu menuFileGenerator;
+
+    @FXML
     Menu menuLogs;
 
     @FXML
@@ -366,6 +369,10 @@ public class DownloaderList extends Application implements Initializable {
         Label menuOneVideoLabel = new Label("One Video");
         menuOneVideoLabel.setOnMouseClicked(event -> main.showScreenOneVideo());
         menuOneVideo.setGraphic(menuOneVideoLabel);
+
+        Label menuFileGeneratorLabel = new Label("File Generator");
+        menuFileGeneratorLabel.setOnMouseClicked(event -> main.showScreenFileGenerator());
+        menuFileGenerator.setGraphic(menuFileGeneratorLabel);
 
         Label menuLogsLabel = new Label("Logs");
         menuLogsLabel.setOnMouseClicked(event -> main.showScreenLogs());

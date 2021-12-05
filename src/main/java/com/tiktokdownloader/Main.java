@@ -17,6 +17,7 @@ public class Main extends Application {
     public static Stage screenDownloaderList;
     public static Stage screenAllUserVideos;
     public static Stage screenOneVideo;
+    public static Stage screenFileGenerator;
     public static Stage screenLogs;
     public static Stage frameSaveAsFile;
     public static Stage frameImportFile;
@@ -60,6 +61,9 @@ public class Main extends Application {
             if (screenLogs != null) {
                 screenLogs.close();
             }
+            if (screenFileGenerator != null) {
+                screenFileGenerator.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,6 +89,9 @@ public class Main extends Application {
             if (screenLogs != null) {
                 screenLogs.close();
             }
+            if (screenFileGenerator != null) {
+                screenFileGenerator.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,6 +110,37 @@ public class Main extends Application {
             screenOneVideo.show();
             if (screenDownloaderList != null) {
                 screenDownloaderList.close();
+            }
+            if (screenAllUserVideos != null) {
+                screenAllUserVideos.close();
+            }
+            if (screenLogs != null) {
+                screenLogs.close();
+            }
+            if (screenFileGenerator != null) {
+                screenFileGenerator.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showScreenFileGenerator() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("filegenerator/FileGenerator.fxml"));
+            Parent root = loader.load();
+            screenFileGenerator = new Stage();
+            screenFileGenerator.setTitle("Tiktok Downloader - File Generator");
+            screenFileGenerator.setScene(new Scene(root));
+            screenFileGenerator.setResizable(false);
+            screenFileGenerator.initModality(Modality.APPLICATION_MODAL);
+            screenFileGenerator.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon.png"))));
+            screenFileGenerator.show();
+            if (screenDownloaderList != null) {
+                screenDownloaderList.close();
+            }
+            if (screenOneVideo != null) {
+                screenOneVideo.close();
             }
             if (screenAllUserVideos != null) {
                 screenAllUserVideos.close();
@@ -134,6 +172,9 @@ public class Main extends Application {
             }
             if (screenAllUserVideos != null) {
                 screenAllUserVideos.close();
+            }
+            if (screenFileGenerator != null) {
+                screenFileGenerator.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

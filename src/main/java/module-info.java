@@ -13,6 +13,8 @@ module com.example.tiktokdownloader {
     exports com.tiktokdownloader.onevideo;
     opens com.tiktokdownloader.alluservideos to javafx.fxml;
     exports com.tiktokdownloader.alluservideos;
+    opens com.tiktokdownloader.filegenerator to javafx.fxml;
+    exports com.tiktokdownloader.filegenerator;
     opens com.tiktokdownloader.logs to javafx.fxml;
     exports com.tiktokdownloader.logs;
     exports com.tiktokdownloader;

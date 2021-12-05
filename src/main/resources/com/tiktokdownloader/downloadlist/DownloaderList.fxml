@@ -1,40 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="864.0" minHeight="578.0" minWidth="720.0" prefHeight="598.0" prefWidth="851.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.tiktokdownloader.downloadlist.DownloaderList">
+<AnchorPane maxHeight="600.0" maxWidth="864.0" minHeight="578.0" minWidth="720.0" prefHeight="598.0" prefWidth="851.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.2" fx:controller="com.tiktokdownloader.downloadlist.DownloaderList">
     <MenuBar layoutY="2.0" stylesheets="@../application.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu fx:id="menuDownloadList" mnemonicParsing="false" />
         <Menu fx:id="menuAllUserVideos" mnemonicParsing="false" />
         <Menu fx:id="menuOneVideo" mnemonicParsing="false" />
+        <Menu fx:id="menuFileGenerator" mnemonicParsing="false" />
         <Menu fx:id="menuLogs" mnemonicParsing="false" />
         <styleClass>
             <String fx:value="menu-text" />
         </styleClass>
     </MenuBar>
-    <Label layoutX="39.0" layoutY="64.0" prefHeight="22.0" prefWidth="167.0" text="Name of user TikTok:">
+    <Label layoutX="39.0" layoutY="64.0" prefHeight="22.0" prefWidth="167.0" text="Tiktok username:">
         <font>
             <Font name="Comic Sans MS" size="15.0" />
         </font>
     </Label>
-    <TextField fx:id="tfTikTokName" layoutX="213.0" layoutY="59.0" onKeyReleased="#tfNameKeyReleased" prefHeight="32.0" prefWidth="268.0" promptText="without @">
+    <TextField fx:id="tfTikTokName" layoutX="178.0" layoutY="59.0" onKeyReleased="#tfNameKeyReleased" prefHeight="32.0" prefWidth="268.0" promptText="without @">
         <font>
             <Font name="Comic Sans MS" size="15.0" />
         </font>
     </TextField>
-    <ImageView fx:id="imageLogo" fitHeight="72.0" fitWidth="364.0" layoutX="496.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="imageLogo" fitHeight="72.0" fitWidth="364.0" layoutX="473.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
     <Label layoutX="31.0" layoutY="125.0" text="Enter destination folder:">
         <font>
             <Font name="Comic Sans MS" size="15.0" />
@@ -50,10 +43,10 @@
         <contextMenu>
             <ContextMenu>
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Open Link" onAction="#openSelectedLink" />
-                    <MenuItem mnemonicParsing="false" text="Copy Link" onAction="#copySelectedLink" />
-                    <MenuItem mnemonicParsing="false" text="Delete" onAction="#deleteSelectedLink" />
-                    <MenuItem mnemonicParsing="false" text="Delete All" onAction="#deleteAllLinks" />
+                    <MenuItem mnemonicParsing="false" onAction="#openSelectedLink" text="Open Link" />
+                    <MenuItem mnemonicParsing="false" onAction="#copySelectedLink" text="Copy Link" />
+                    <MenuItem mnemonicParsing="false" onAction="#deleteSelectedLink" text="Delete" />
+                    <MenuItem mnemonicParsing="false" onAction="#deleteAllLinks" text="Delete All" />
                 </items>
             </ContextMenu>
         </contextMenu></ListView>

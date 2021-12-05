@@ -25,6 +25,9 @@ public class Logs extends Application implements Initializable {
     Menu menuOneVideo;
 
     @FXML
+    Menu menuFileGenerator;
+
+    @FXML
     Menu menuLogs;
 
     /**************************** VARIABLES ****************************/
@@ -50,6 +53,10 @@ public class Logs extends Application implements Initializable {
         Label menuOneVideoLabel = new Label("One Video");
         menuOneVideoLabel.setOnMouseClicked(event -> main.showScreenOneVideo());
         menuOneVideo.setGraphic(menuOneVideoLabel);
+
+        Label menuFileGeneratorLabel = new Label("File Generator");
+        menuFileGeneratorLabel.setOnMouseClicked(event -> main.showScreenFileGenerator());
+        menuFileGenerator.setGraphic(menuFileGeneratorLabel);
 
         Label menuLogsLabel = new Label("Logs");
         menuLogs.setGraphic(menuLogsLabel);
