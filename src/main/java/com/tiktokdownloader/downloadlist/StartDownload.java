@@ -103,9 +103,20 @@ public class StartDownload extends Application implements Initializable {
         boolean tiktokScraperInstalled = checkTiktokScraper(commandOS, options, "tiktok-scraper --version");
         if (nodeInstalled && npmInstalled && tiktokScraperInstalled) {
             for (String link : StartDownload.listUrl) {
-                runCommand(commandOS, options, "tiktok-scraper video " + link + " -d -w false --filepath '" + path + "'");
+                String ID = link.split("/video/")[1];
+                if (!fileIdExist(ID, path)) {
+                    runCommand(commandOS, options, "tiktok-scraper video " + link + " -d -w false --filepath '" + path + "'");
+                } else {
+                    Platform.runLater(() -> createText("success-text", numLine + ": File " + ID + ".mp4 exist\n"));
+                }
+                numLine++;
             }
         }
+    }
+
+    private boolean fileIdExist(String ID, String path) {
+        path = (path.endsWith("/")) ? path : path + "/";
+        return new File(path + ID + ".mp4").exists();
     }
 
     private boolean checkTiktokScraper(String... command) {
@@ -232,11 +243,11 @@ public class StartDownload extends Application implements Initializable {
                     db.close();
                 }
             } else {
+                // Guardar los fallidos en un array para despues volver a preguntar si lo quiere volver a intentar, también guardar la numero de la line que ha fallado
                 Platform.runLater(() -> createText("error-text", numLine + ": Not supported, " + link + "\n"));
             }
 
             process.waitFor();
-            numLine++;
 
             bufferedReader.close();
             process.destroy();
