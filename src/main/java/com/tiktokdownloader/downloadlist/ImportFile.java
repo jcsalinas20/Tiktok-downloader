@@ -114,6 +114,7 @@ public class ImportFile extends Application implements Initializable {
                 Map<String, String> linksMap = new HashMap<>();
                 listTextFlow.clear();
                 setInstructionTextFlow();
+                DownloaderList.tfName.setText(file.getName().substring(0, file.getName().lastIndexOf('.')));
                 createText("title", "\nStart Import\n");
                 createText("success-text", "File "+file.getAbsolutePath()+" exists.\n");
                 createText("normal-text", "Opening "+file.getName()+"\n");

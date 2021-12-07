@@ -93,6 +93,7 @@ public class DownloaderList extends Application implements Initializable {
 
     /**************************** VARIABLES ****************************/
 
+    static TextField tfName;
     Main main = new Main();
     static ObservableList<String> itemsListView = FXCollections.observableArrayList();
     boolean[] fieldInRed = new boolean[] {false, false};
@@ -123,7 +124,7 @@ public class DownloaderList extends Application implements Initializable {
             }
             return verifyLength(change);
         };
-        tfTikTokName.setTextFormatter(new TextFormatter<String>(filter));
+        tfName.setTextFormatter(new TextFormatter<String>(filter));
     }
 
     private boolean validateUrlTikTok(String url){
@@ -219,11 +220,11 @@ public class DownloaderList extends Application implements Initializable {
 
     private boolean verifyTextFields() {
         boolean allCorrect = true;
-        if (isEmpty(tfTikTokName)) {
+        if (isEmpty(tfName)) {
             allCorrect = false;
             fieldInRed[0] = true;
-            tfTikTokName.setText("");
-            errorTextField(tfTikTokName);
+            tfName.setText("");
+            errorTextField(tfName);
         }
         if (isEmpty(tfPath)) {
             allCorrect = false;
@@ -250,7 +251,7 @@ public class DownloaderList extends Application implements Initializable {
                 File folder = new File(tfPath.getText());
                 if (folder.exists()) {
                     if (folder.isDirectory()) {
-                        StartDownload.file = new File(folder.getAbsolutePath()+File.separator+tfTikTokName.getText()+File.separator+"._tiktok.txt");
+                        StartDownload.file = new File(folder.getAbsolutePath()+File.separator+tfName.getText()+File.separator+"._tiktok.txt");
                         StartDownload.listUrl = listLinks.getItems();
                         main.showFrameStartDownload();
                     } else {
@@ -275,7 +276,7 @@ public class DownloaderList extends Application implements Initializable {
     @FXML
     private void btnSaveAsFileOnClick() {
         if (listLinks.getItems().size() > 0) {
-            SaveAsFile.fileName = tfTikTokName.getText();
+            SaveAsFile.fileName = tfName.getText();
             SaveAsFile.urls = listLinks.getItems();
             main.showFrameSaveAsFile();
         } else showAlert("Error in the List", "The list of the links have 0 items.");
@@ -334,7 +335,7 @@ public class DownloaderList extends Application implements Initializable {
 
     @FXML
     private void tfNameKeyReleased() {
-        setDefaultColorsTextField(0, tfTikTokName);
+        setDefaultColorsTextField(0, tfName);
     }
 
     @FXML
@@ -346,6 +347,7 @@ public class DownloaderList extends Application implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tfName = tfTikTokName;
         createImageLogo();
         createDirectoryChooser();
 
