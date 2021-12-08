@@ -55,9 +55,9 @@
       </font>
    </Button>
    <Button fx:id="btnRestart" alignment="CENTER" disable="true" layoutX="675.0" layoutY="219.0" mnemonicParsing="false" onAction="#onClickRestart" prefHeight="32.0" prefWidth="125.0" text="Restart">
-      <font>
-         <Font name="Comic Sans MS" size="15.0" />
-      </font>
+       <font>
+           <Font name="Comic Sans MS" size="15.0" />
+       </font>
    </Button>
   <ScrollPane fx:id="scrollPane" layoutX="42.0" layoutY="265.0" prefHeight="278.0" prefWidth="758.0" styleClass="text-flow-panel" stylesheets="@../application.css">
      <TextFlow fx:id="tFlowImports" prefHeight="263.0" prefWidth="647.0" styleClass="text-flow" stylesheets="@../application.css">
@@ -66,4 +66,5 @@
         </padding>
      </TextFlow>
   </ScrollPane>
+   <ComboBox fx:id="cbTypeFile" layoutX="351.0" layoutY="219.0" prefHeight="32.0" prefWidth="150.0" promptText="File Generator" />
 </AnchorPane>

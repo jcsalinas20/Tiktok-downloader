@@ -27,6 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            //FXMLLoader root = new FXMLLoader(Main.class.getResource("downloadlist/DownloaderList.fxml"));
             FXMLLoader root = new FXMLLoader(Main.class.getResource("downloadlist/DownloaderList.fxml"));
             Scene scene = new Scene(root.load(), 840, 580);
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toString());

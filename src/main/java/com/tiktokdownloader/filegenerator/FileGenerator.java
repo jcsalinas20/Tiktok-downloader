@@ -4,6 +4,7 @@ import com.tiktokdownloader.Main;
 import com.tiktokdownloader.downloadlist.StartDownload;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -17,14 +18,9 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.UnaryOperator;
 
 import static com.tiktokdownloader.Main.screenDownloaderList;
@@ -70,8 +66,12 @@ public class FileGenerator extends Application implements Initializable {
     @FXML
     Button btnRestart;
 
+    @FXML
+    ComboBox<String> cbTypeFile;
+
     Main main = new Main();
     ObservableList<Node> listTextFlow;
+    ObservableList<String> listTypeFile;
     public static Thread thread;
 
     private void createImageLogo() {
@@ -136,9 +136,24 @@ public class FileGenerator extends Application implements Initializable {
                 if (folder.exists()) {
                     if (folder.isDirectory()) {
                         btnCreateFile.setDisable(true);
-                        ArrayList<String> files = getNameFiles(tfPath.getText());
-                        String destinyFile = createFile(tfTikTokName.getText(), tfPath.getText());
-                        printInFile(destinyFile, tfTikTokName.getText(), files);
+                        if (cbTypeFile.getSelectionModel().getSelectedIndex() == 0 || cbTypeFile.getSelectionModel().getSelectedIndex() == -1) {
+                            ArrayList<String> files = getNameFiles(tfPath.getText(), "mp4");
+                            String destinyFile = createFile(tfTikTokName.getText(), tfPath.getText());
+                            ArrayList<String> tiktokVideos = new ArrayList<>();
+                            for (String file: files) {
+                                tiktokVideos.add("https://www.tiktok.com/@" + tfTikTokName.getText() + "/video/" + file);
+                            }
+                            printInFile(destinyFile, tiktokVideos);
+                        } else {
+                            ArrayList<String> files = getNameFiles(tfPath.getText(), "txt");
+                            String path = tfPath.getText();
+                            path = path.replaceAll("\\\\", "/");
+                            path = (path.endsWith("/")) ? path : path + "/" ;
+                            new File( path + tfTikTokName.getText() + ".txt").delete();
+                            String destinyFile = createFile(tfTikTokName.getText(), tfPath.getText());
+                            ArrayList<String> tiktokVideos = readAllFiles(tfPath.getText(), files);
+                            printInFile(destinyFile, tiktokVideos);
+                        }
                         Platform.runLater(() -> createText("title", "Finished\n"));
                         btnRestart.setDisable(false);
                     } else {
@@ -175,7 +190,28 @@ public class FileGenerator extends Application implements Initializable {
         }
     }
 
-    private ArrayList<String> getNameFiles(String path) {
+    private ArrayList<String> readAllFiles(String path, ArrayList<String> files) {
+        ArrayList<String> urlVideos = new ArrayList<>();
+        path = path.replaceAll("\\\\", "/");
+        path = (path.endsWith("/")) ? path : path + "/" ;
+        for (String name : files) {
+            File file = new File(path + name);
+            if (file.exists()) {
+                try {
+                    Scanner scanner = new Scanner(file);
+                    while (scanner.hasNextLine()) {
+                        urlVideos.add(scanner.nextLine());
+                    }
+                    scanner.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return urlVideos;
+    }
+
+    private ArrayList<String> getNameFiles(String path, String extension) {
         ArrayList<String> files = new ArrayList<>();
         File folder = new File(path);
         File[] allFiles = folder.listFiles();
@@ -184,9 +220,15 @@ public class FileGenerator extends Application implements Initializable {
             if (file.isFile()) {
                 String[] nameSplit = file.getName().split("\\.");
                 String extensionFile = nameSplit[nameSplit.length - 1];
-                if (extensionFile.equalsIgnoreCase("mp4") && nameSplit.length == 2) {
-                    if (nameSplit[0].matches("[0-9]+")) {
-                        files.add(nameSplit[0]);
+                if (extension.equals("mp4")) {
+                    if (extensionFile.equalsIgnoreCase("mp4") && nameSplit.length == 2) {
+                        if (nameSplit[0].matches("[0-9]+")) {
+                            files.add(nameSplit[0]);
+                        }
+                    }
+                } else if (extension.equals("txt")) {
+                    if (extensionFile.equalsIgnoreCase("txt")) {
+                        files.add(file.getName());
                     }
                 }
             }
@@ -212,12 +254,12 @@ public class FileGenerator extends Application implements Initializable {
         return file.getAbsolutePath();
     }
 
-    private void printInFile(String destinyFile, String name, ArrayList<String> files) {
+    private void printInFile(String destinyFile, ArrayList<String> tiktoks) {
         try {
             PrintStream ps = new PrintStream(destinyFile);
-            for (String file: files) {
-                ps.println("https://www.tiktok.com/@" + name + "/video/" + file);
-                Platform.runLater(() -> createText("success-text", "https://www.tiktok.com/@" + name + "/video/" + file + "\n"));
+            for (String tiktok: tiktoks) {
+                ps.println(tiktok);
+                Platform.runLater(() -> createText("success-text", tiktok + "\n"));
             }
             ps.close();
         } catch (FileNotFoundException e) {
@@ -255,8 +297,11 @@ public class FileGenerator extends Application implements Initializable {
         createImageLogo();
         createDirectoryChooser();
 
+        cbTypeFile.setItems(FXCollections.observableArrayList("File Generator", "Merge Files"));
         tfTikTokNameOnKeyTyped();
         tfPath.setText(System.getProperty("user.home"));
+        tfPath.setText("C:\\Users\\jcsal\\Downloads\\cosas\\__FILES\\TEMP\\merge");
+        tfTikTokName.setText("TEMP");
 
         Label menuDownloadListLabel = new Label("Download List");
         menuDownloadListLabel.setOnMouseClicked(event -> main.showScreenDownloadList());
