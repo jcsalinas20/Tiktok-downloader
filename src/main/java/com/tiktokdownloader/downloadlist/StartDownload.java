@@ -115,8 +115,10 @@ public class StartDownload extends Application implements Initializable {
     }
 
     private boolean fileIdExist(String ID, String path) {
+        path = path.replaceAll("\\\\", "/").replaceAll("\"", "");
         path = (path.endsWith("/")) ? path : path + "/";
-        return new File(path + ID + ".mp4").exists();
+        File file = new File(path + ID + ".mp4");
+        return file.exists();
     }
 
     private boolean checkTiktokScraper(String... command) {
